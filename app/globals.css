@@ -105,3 +105,20 @@ body {
 .rating-button:active {
     transform: translateY(0);
 }
+
+.graph-container {
+    width: 720px;
+    max-width: calc(100% - 40px);
+    margin: 20px auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.ratings-canvas {
+    width: 100%;
+    height: 160px;
+    display: block;
+    background: transparent;
+    border-radius: 8px;
+}
