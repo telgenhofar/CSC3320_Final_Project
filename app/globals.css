@@ -1,11 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap");
+
 :root {
-    --dark-grey: #121212;
-    --grey: #2c2c2c;
-    --light-grey: #3d3d3d;
-    --white: #dfdfdf;
+    --dark-grey: hsl(0, 0%, 5%);
+    --container-grey: hsl(0, 0%, 15%);
+    --grey: hsl(0, 0%, 25%);
+    --light-grey: hsl(0, 0%, 35%);
+    --white: hsl(0, 0%, 90%);
+    --purple: hsl(276, 91%, 38%);
 }
 
 body {
     background-color: var(--dark-grey);
     color: var(--white);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: "Inter", sans-serif;
+}
+
+.page-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.gauge-container {
+    display: inline-block;
+    position: relative;
+    background: var(--container-grey);
+    padding: 25px;
+    border-radius: 25px;
+}
+
+.gauge-face {
+    width: 400px;
+    height: 200px;
+    border-top-left-radius: 200px;
+    border-top-right-radius: 200px;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.gauge-needle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    height: 80%;
+    background: var(--purple);
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+}
+
+.gauge-tick-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform-origin: bottom;
+}
+
+.gauge-tick {
+    position: absolute;
+    bottom: 175px;
+    left: 50%;
+    width: 2px;
+    height: 10px;
+    background: var(--dark-grey);
+}
+
+.tick-label {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: var(--dark-grey);
+}
+
+.rating-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 10px;
+    list-style: none;
+}
+
+.rating-button {
+    background: var(--grey);
+    border: none;
+    color: var(--white);
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.rating-button:hover {
+    background: var(--purple);
+    transform: translateY(-2px);
+}
+
+.rating-button:active {
+    transform: translateY(0);
 }
