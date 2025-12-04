@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import GaugeChart from "./GaugeChart";
-import RatingsGraph from "./RatingsGraph";
+import GaugeChart from "./GaugeChart/GaugeChart";
+import RatingsGraph from "./RatingsGraph/RatingsGraph";
 
 export default function Page() {
     const [average, setAverage] = useState(0);

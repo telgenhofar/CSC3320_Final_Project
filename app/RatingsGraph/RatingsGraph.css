@@ -1,0 +1,31 @@
+:root {
+    --graph-line-color: hsl(270, 95%, 75%);
+    --graph-line-width: 2px;
+
+    --graph-fill-color: hsla(270, 95%, 75%, 0.12);
+    --graph-grid-color: hsla(0, 0%, 100%, 0.08);
+
+    --graph-text-color: rgba(255,255,255,0.6);
+    --graph-tick-color: rgba(255,255,255,0.45);
+    --graph-badge-color: rgba(255,255,255,0.95);
+
+    --graph-font-main: 12px Inter, sans-serif;
+    --graph-font-badge: 13px Inter, sans-serif;
+
+    --graph-height: 240px;
+}
+
+.ratings-graph-container {
+    margin: 0 auto;
+    width: 50%;
+    height: var(--graph-height);
+    position: relative;
+    background: transparent;
+}
+
+.ratings-graph-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none;
+}

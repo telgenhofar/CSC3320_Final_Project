@@ -1,4 +1,5 @@
 "use client";
+import "./RatingsGraph.css";
 import { useEffect, useRef } from "react";
 
 type RatingGraphProps = {
@@ -12,8 +13,24 @@ export default function RatingsGraph({
     windowSeconds,
     sampleIntervalMs
 }: RatingGraphProps) {
+
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const rafRef = useRef<number | null>(null);
+
+    const css = () => {
+        const root = getComputedStyle(document.documentElement);
+        return {
+            lineColor: root.getPropertyValue("--graph-line-color").trim(),
+            lineWidth: parseFloat(root.getPropertyValue("--graph-line-width")),
+            fillColor: root.getPropertyValue("--graph-fill-color").trim(),
+            gridColor: root.getPropertyValue("--graph-grid-color").trim(),
+            textColor: root.getPropertyValue("--graph-text-color").trim(),
+            tickColor: root.getPropertyValue("--graph-tick-color").trim(),
+            badgeColor: root.getPropertyValue("--graph-badge-color").trim(),
+            fontMain: root.getPropertyValue("--graph-font-main").trim(),
+            fontBadge: root.getPropertyValue("--graph-font-badge").trim(),
+        };
+    };
 
     const computePoints = (now: number) => {
         const samples: number[] = [];
@@ -25,12 +42,10 @@ export default function RatingsGraph({
 
         const sorted = [...events].sort((a, b) => a - b);
 
-        const points = samples.map((t) => {
-            const count = sorted.filter(e => e <= t).length;
-            return { t, count };
-        });
-
-        return points;
+        return samples.map((t) => ({
+            t,
+            count: sorted.filter(e => e <= t).length
+        }));
     };
 
     const draw = () => {
@@ -39,6 +54,8 @@ export default function RatingsGraph({
 
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
+
+        const styles = css();
 
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
@@ -61,10 +78,8 @@ export default function RatingsGraph({
 
         ctx.clearRect(0, 0, rect.width, rect.height);
 
-        ctx.fillStyle = "transparent";
-        ctx.fillRect(0, 0, rect.width, rect.height);
-
-        ctx.strokeStyle = "rgba(255,255,255,0.08)";
+        // Gridlines
+        ctx.strokeStyle = styles.gridColor;
         ctx.lineWidth = 1;
         ctx.beginPath();
         const yGridCount = 4;
@@ -75,8 +90,9 @@ export default function RatingsGraph({
         }
         ctx.stroke();
 
-        ctx.fillStyle = "rgba(255,255,255,0.6)";
-        ctx.font = "12px Inter, sans-serif";
+        // Y Axis ticks
+        ctx.fillStyle = styles.textColor;
+        ctx.font = styles.fontMain;
         ctx.textAlign = "right";
         ctx.textBaseline = "middle";
 
@@ -86,46 +102,48 @@ export default function RatingsGraph({
             ctx.fillText(String(v), padding.left - 8, yy);
         }
 
+        // X Axis ticks
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
-        const tickCount = 5;
-        ctx.fillStyle = "rgba(255,255,255,0.45)";
+        ctx.fillStyle = styles.tickColor;
 
+        const tickCount = 5;
         for (let i = 0; i <= tickCount; i++) {
             const tt = t0 + (i * (windowMs / tickCount));
             const x = padding.left + (i * (w / tickCount));
             const d = new Date(tt);
             const label = `${String(d.getHours()).padStart(2, "0")}:${String(
-                d.getMinutes()
-            ).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`;
+                d.getMinutes()).padStart(2, "0")}:${String(d.getSeconds()).padStart(2, "0")}`;
             ctx.fillText(label, x, rect.height - padding.bottom + 4);
         }
 
+        // Graph line
         ctx.beginPath();
         for (let i = 0; i < points.length; i++) {
             const p = points[i];
+            if (!p) continue;
             const x = padding.left + ((p.t - t0) / windowMs) * w;
             const y = padding.top + h - (p.count / maxCount) * h;
             if (i === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
         }
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "#C084FC";
+        ctx.lineWidth = styles.lineWidth;
+        ctx.strokeStyle = styles.lineColor;
         ctx.stroke();
 
+        // Fill
         ctx.lineTo(padding.left + w, padding.top + h);
         ctx.lineTo(padding.left, padding.top + h);
         ctx.closePath();
-        ctx.fillStyle = "rgba(192,132,252,0.12)";
+        ctx.fillStyle = styles.fillColor;
         ctx.fill();
 
-        const curCount = counts[counts.length - 1] ?? 0;
-        const badge = `Total: ${curCount}`;
+        // Label for total count
         ctx.textAlign = "left";
         ctx.textBaseline = "middle";
-        ctx.fillStyle = "rgba(255,255,255,0.95)";
-        ctx.font = "13px Inter, sans-serif";
-        ctx.fillText(badge, padding.left, padding.top - 2);
+        ctx.fillStyle = styles.badgeColor;
+        ctx.font = styles.fontBadge;
+        ctx.fillText(`Total: ${counts.at(-1)}`, padding.left, padding.top - 2);
     };
 
     useEffect(() => {
@@ -133,10 +151,13 @@ export default function RatingsGraph({
             draw();
             rafRef.current = requestAnimationFrame(loop);
         };
+
         rafRef.current = requestAnimationFrame(loop);
 
         return () => {
-            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+            if (rafRef.current !== null) {
+                cancelAnimationFrame(rafRef.current);
+            }
         };
     }, [events]);
 
@@ -147,8 +168,8 @@ export default function RatingsGraph({
     }, []);
 
     return (
-        <div className="graph-container">
-            <canvas ref={canvasRef} className="ratings-canvas" />
+        <div className="ratings-graph-container">
+            <canvas ref={canvasRef} className="ratings-graph-canvas" />
         </div>
     );
 }

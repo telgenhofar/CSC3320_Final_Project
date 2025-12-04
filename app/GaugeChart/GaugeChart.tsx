@@ -1,4 +1,5 @@
 "use client";
+import "./GaugeChart.css"
 
 type GaugeChartProps = {
     average: number;
