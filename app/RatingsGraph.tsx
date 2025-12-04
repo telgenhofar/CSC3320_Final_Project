@@ -104,6 +104,7 @@ export default function RatingsGraph({
         ctx.beginPath();
         for (let i = 0; i < points.length; i++) {
             const p = points[i];
+            if (!p) continue;
             const x = padding.left + ((p.t - t0) / windowMs) * w;
             const y = padding.top + h - (p.count / maxCount) * h;
             if (i === 0) ctx.moveTo(x, y);
