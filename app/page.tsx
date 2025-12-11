@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import GaugeChart from "./GaugeChart/GaugeChart";
 import RatingsGraph from "./RatingsGraph/RatingsGraph";
 import LoginComponent from "./LoginComponent/LoginComponent";
+import Leaderboard from "./Leaderboard/Leaderboard";
 
 export default function Page() {
     const [userId, setUserId] = useState<string | null>(null);
@@ -50,7 +51,16 @@ export default function Page() {
     return (
         <div className="page-container">
             <h1>Average: {average}</h1>
-            <GaugeChart average={average} onClear={clear} userId={userId} />
+            
+            <div className="charts-container">
+                <GaugeChart 
+                    average={average}
+                    onClear={clear}
+                    userId={userId} 
+                />
+                <Leaderboard />
+            </div>
+
             <RatingsGraph
                 events={events}
                 windowSeconds={60}

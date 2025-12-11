@@ -16,7 +16,6 @@ export default function LoginComponent({ onLogin }: LoginComponentProps) {
         });
 
         const data = await res.json();
-        localStorage.setItem("userId", data.userId);
         onLogin(data.userId);
     }
 

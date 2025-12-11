@@ -1,0 +1,76 @@
+:root {
+    --leaderboard-hover: hsla(0, 0%, 100%, 0.05);
+    --bronze: hsl(30, 61%, 50%);
+}
+
+.leaderboard-container {
+    background: var(--container-grey);
+    width: 300px;
+    border-radius: 25px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-align: center;
+    color: var(--white);
+}
+
+.leaderboard-scroll {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-thumb {
+    background: var(--purple);
+    border-radius: 6px;
+}
+
+.leaderboard-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s ease;
+}
+
+.leaderboard-entry:hover {
+    background: var(--leaderboard-hover);
+    border-radius: 8px;
+}
+
+.leaderboard-rank {
+    width: 24px;
+    font-weight: 600;
+}
+
+.leaderboard-name {
+    flex: 1;
+    margin-left: 12px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.leaderboard-clicks {
+    font-weight: 600;
+}
+
+.leaderboard-entry:nth-child(1) .leaderboard-rank {
+    color: gold;
+}
+.leaderboard-entry:nth-child(2) .leaderboard-rank {
+    color: silver;
+}
+.leaderboard-entry:nth-child(3) .leaderboard-rank {
+    color: var(--bronze);
+}

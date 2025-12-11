@@ -23,3 +23,14 @@ body {
     text-align: center;
     margin-top: 50px;
 }
+
+.charts-container {
+    margin: 20px 0;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
