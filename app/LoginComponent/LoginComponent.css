@@ -1,0 +1,59 @@
+:root {
+    --input-border: hsla(0, 0%, 100%, 0.18);
+    --input-background: hsla(0, 0%, 100%, 0.05);
+}
+
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--background);
+}
+
+.login-container {
+    background: var(--container-grey);
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    margin: auto;
+    text-align: center;
+}
+
+.login-prompt {
+    color: var(--white);
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+
+.login-input {
+    width: 80%;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    background: var(--input-background);
+    color: var(--white);
+    font-size: 15px;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-button {
+    background: var(--grey);
+    border: none;
+    color: var(--white);
+    padding: 10px 18px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+    background: var(--purple);
+    transform: translateY(-2px);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}

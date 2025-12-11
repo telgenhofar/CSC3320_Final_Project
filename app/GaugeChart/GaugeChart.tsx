@@ -4,9 +4,10 @@ import "./GaugeChart.css"
 type GaugeChartProps = {
     average: number;
     onClear: () => void;
+    userId: string;
 };
 
-export default function GaugeChart({ average, onClear }: GaugeChartProps) {
+export default function GaugeChart({ average, onClear, userId }: GaugeChartProps) {
     const values = [1, 2, 3, 4, 5];
     const rotation = ((average - 1) / 4) * 180 - 90;
 
@@ -14,7 +15,7 @@ export default function GaugeChart({ average, onClear }: GaugeChartProps) {
         await fetch("/api/rate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ value })
+            body: JSON.stringify({ value, userId })
         });
     };
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 let client: MongoClient | null = null;
 
@@ -8,11 +8,12 @@ export async function POST(req: Request) {
     await client.connect();
 
     const db = client.db("analytics");
-    const ratings = db.collection("ratings");
+    const events = db.collection("ratings");
 
-    const { value } = await req.json();
+    const { value, userId } = await req.json();
 
-    await ratings.insertOne({
+    await events.insertOne({
+        userId: new ObjectId(userId),
         value,
         timestamp: Date.now()
     });

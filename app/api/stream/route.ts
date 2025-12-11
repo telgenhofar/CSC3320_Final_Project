@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { MongoClient } from "mongodb";
 
 let client: MongoClient | null = null;

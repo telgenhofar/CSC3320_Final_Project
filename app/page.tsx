@@ -2,10 +2,17 @@
 import { useEffect, useState } from "react";
 import GaugeChart from "./GaugeChart/GaugeChart";
 import RatingsGraph from "./RatingsGraph/RatingsGraph";
+import LoginComponent from "./LoginComponent/LoginComponent";
 
 export default function Page() {
+    const [userId, setUserId] = useState<string | null>(null);
     const [average, setAverage] = useState(0);
     const [events, setEvents] = useState<number[]>([]);
+
+    useEffect(() => {
+        const id = localStorage.getItem("userId");
+        if (id) setUserId(id);
+    }, []);
 
     const clear = async () => {
         await fetch("/api/ratings", { method: "DELETE" });
@@ -19,7 +26,6 @@ export default function Page() {
 
             es.onmessage = (event) => {
                 const data = JSON.parse(event.data);
-
                 setAverage(data.average);
                 setEvents(data.events);
             };
@@ -35,12 +41,16 @@ export default function Page() {
         return () => {
             es?.close();
         };
-    }, []);
+    }, [userId]);
+
+    if (!userId) {
+        return <LoginComponent onLogin={(id) => setUserId(id)} />;
+    }
 
     return (
         <div className="page-container">
             <h1>Average: {average}</h1>
-            <GaugeChart average={average} onClear={clear} />
+            <GaugeChart average={average} onClear={clear} userId={userId} />
             <RatingsGraph
                 events={events}
                 windowSeconds={60}
