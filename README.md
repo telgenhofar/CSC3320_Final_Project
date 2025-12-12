@@ -7,4 +7,4 @@ Aiden Telgenhof
 https://csc-3320-final-project.vercel.app
 
 # Screnshot
-![Screenshot of web app](public\screenshot.png)
+![Screenshot of web app](./public/screenshot.png)
