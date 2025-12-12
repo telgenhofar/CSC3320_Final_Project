@@ -1,3 +1,8 @@
+/**
+ * @file Leaderboard.css
+ * @author Aiden Telgenhof
+ * @fileoverview This file contains all of the CSS styles for the Leaderboard component.
+ */
 :root {
     --leaderboard-hover: hsla(0, 0%, 100%, 0.05);
     --bronze: hsl(30, 61%, 50%);

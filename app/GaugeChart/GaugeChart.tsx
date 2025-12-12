@@ -1,3 +1,8 @@
+/**
+ * @file GaugeChart.tsx
+ * @author Aiden Telgenhof
+ * @fileoverview This file contains all of the TypeScript code for the GaugeChart component.
+ */
 "use client";
 import "./GaugeChart.css"
 
@@ -7,6 +12,9 @@ type GaugeChartProps = {
     userId: string;
 };
 
+/**
+ * GaugeChart component that displays a gauge chart with a needle indicating the average rating.
+ */
 export default function GaugeChart({ average, onClear, userId }: GaugeChartProps) {
     const values = [1, 2, 3, 4, 5];
     const rotation = ((average - 1) / 4) * 180 - 90;

@@ -1,3 +1,8 @@
+/**
+ * @file api/rate/route.ts
+ * @author Aiden Telgenhof
+ * @fileoverview Handles rating submissions by users.
+ */
 import { NextResponse } from "next/server";
 import { MongoClient, ObjectId } from "mongodb";
 

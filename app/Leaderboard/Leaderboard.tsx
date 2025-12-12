@@ -1,3 +1,8 @@
+/**
+ * @file Leaderboard.tsx
+ * @author Aiden Telgenhof
+ * @fileoverview This file contains all of the TypeScript code for the Leaderboard component.
+ */
 "user client";
 import { useEffect, useState } from "react";
 import "./Leaderboard.css";
@@ -8,6 +13,9 @@ type Entry = {
     user: { username: string };
 }
 
+/**
+ * Leaderboard component that displays a real-time leaderboard of users based on their clicks.
+ */
 export default function Leaderboard() {
     const [data, setData] = useState<Entry[]>([]);
 

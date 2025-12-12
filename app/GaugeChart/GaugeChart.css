@@ -1,3 +1,8 @@
+/**
+ * @file GaugeChart.css
+ * @author Aiden Telgenhof
+ * @fileoverview This file contains all of the CSS styles for the GaugeChart component.
+ */
 .gauge-container {
     display: inline-block;
     position: relative;

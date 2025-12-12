@@ -1,3 +1,8 @@
+/**
+ * @file LoginComponent.tsx
+ * @author Aiden Telgenhof
+ * @fileoverview This file contains all of the TypeScript code for the LoginComponent component.
+ */
 "use client";
 import { useState } from "react";
 import "./LoginComponent.css";

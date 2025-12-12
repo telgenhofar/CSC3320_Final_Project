@@ -1,3 +1,10 @@
+/**
+ * @file api/login/route.tsx
+ * @author Aiden Telgenhof
+ * @fileoverview This file handles user login and session creation.
+ * Also sends user and session information to database and returns user ID
+ * for client-side input later on.
+ */
 import { NextResponse } from "next/server";
 import { MongoClient, ObjectId } from "mongodb";
 

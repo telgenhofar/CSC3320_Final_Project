@@ -1,3 +1,8 @@
+/**
+ * @file page.tsx
+ * @author Aiden Telgenhof
+ * @fileoverview This file contains the main page component for the application.
+ */
 "use client";
 import { useEffect, useState } from "react";
 import GaugeChart from "./GaugeChart/GaugeChart";
@@ -10,15 +15,28 @@ export default function Page() {
     const [average, setAverage] = useState(0);
     const [events, setEvents] = useState<number[]>([]);
 
+    /**
+     * Load userId from local cookies if it has been cached previously.
+     * NOTE: I did have cookies working, but it was messing with the login page
+     * so I scrapped the storing of cookies for now.
+     */
     useEffect(() => {
         const id = localStorage.getItem("userId");
         if (id) setUserId(id);
     }, []);
 
+    /**
+     * Calls the DELETE method from the ratings route to clear all data
+     * stored in the ratings table.
+     */
     const clear = async () => {
         await fetch("/api/ratings", { method: "DELETE" });
     };
 
+    /**
+     * Sets up an EventSource connection to the /api/stream endpoint to
+     * receive real-time updates of the average rating and events.
+     */
     useEffect(() => {
         let es: EventSource | null = null;
 
@@ -44,10 +62,16 @@ export default function Page() {
         };
     }, [userId]);
 
+    /**
+     * If the user is not logged in, render the LoginComponent.
+     */
     if (!userId) {
         return <LoginComponent onLogin={(id) => setUserId(id)} />;
     }
 
+    /**
+     * Render the main page content.
+     */
     return (
         <div className="page-container">
             <h1>Average: {average}</h1>

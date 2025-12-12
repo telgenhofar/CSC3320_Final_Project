@@ -1,3 +1,8 @@
+/**
+ * @file api/stream/route.ts
+ * @author Aiden Telgenhof
+ * @fileoverview this route retrieves the change stream that provides real-time updates for the gauge chart
+ */
 import { MongoClient } from "mongodb";
 
 let client: MongoClient | null = null;

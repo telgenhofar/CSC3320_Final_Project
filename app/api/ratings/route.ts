@@ -1,3 +1,8 @@
+/**
+ * @file api/ratings/route.ts
+ * @author Aiden Telgenhof
+ * @fileoverview Handles GET and DELETE requests for ratings data.
+ */
 import { NextResponse } from "next/server";
 import { MongoClient } from "mongodb";
 

@@ -1,3 +1,9 @@
+/**
+ * @file api/leaderboard/route.ts
+ * @author Aiden Telgenhof
+ * @fileoverview This file provides a server-sent events (SSE) endpoint for streaming
+ * leaderboard data based on user ratings stored in a MongoDB database.
+ */
 import { MongoClient } from "mongodb";
 
 let client: MongoClient | null = null;

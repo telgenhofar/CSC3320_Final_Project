@@ -1,3 +1,8 @@
+/**
+ * @file LoginComponent.css
+ * @author Aiden Telgenhof
+ * @fileoverview This file contains all of the CSS styles for the LoginComponent component.
+ */
 :root {
     --input-border: hsla(0, 0%, 100%, 0.18);
     --input-background: hsla(0, 0%, 100%, 0.05);

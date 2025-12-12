@@ -1,3 +1,8 @@
+/**
+ * @file RatingsGraph.tsx
+ * @author Aiden Telgenhof
+ * @fileoverview This file contains all of the TypeScript code for the RatingsGraph component.
+ */
 "use client";
 import "./RatingsGraph.css";
 import { useEffect, useRef } from "react";
@@ -8,6 +13,11 @@ type RatingGraphProps = {
     sampleIntervalMs: number;
 };
 
+/**
+ * Creates the ratings graph component to be placed on the page.
+ * NOTE: This component has very annoying code that should be disregarded entirely :)
+ * (I do not like working with canvas elements like this...)
+ */
 export default function RatingsGraph({
     events,
     windowSeconds,
@@ -32,6 +42,11 @@ export default function RatingsGraph({
         };
     };
 
+    /**
+     * Computes key value pairs for a specific time and the count of events at that time
+     * @param now - current timestamp
+     * @returns An array of key value pairs that can be treated as datapoints for the graph
+     */
     const computePoints = (now: number) => {
         const samples: number[] = [];
         const steps = Math.max(2, Math.floor((windowSeconds * 1000) / sampleIntervalMs));
@@ -48,6 +63,9 @@ export default function RatingsGraph({
         }));
     };
 
+    /**
+     * Draws the ratings graph datapoints on the react component canvas.
+     */
     const draw = () => {
         const canvas = canvasRef.current;
         if (!canvas) return;
